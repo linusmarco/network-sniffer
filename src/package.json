@@ -1,0 +1,21 @@
+{
+    "name": "network-sniffer",
+    "version": "1.0.0",
+    "description": "simple network sniffer utility",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/linusmarco/network-sniffer.git"
+    },
+    "author": "Linus Marco",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/linusmarco/network-sniffer/issues"
+    },
+    "homepage": "https://github.com/linusmarco/network-sniffer#readme",
+    "scripts": {
+        "start": "node sniff.js 192.168.1.180:8080"
+    },
+    "dependencies": {
+        "http-server": "0.11.1"
+    }
+}
