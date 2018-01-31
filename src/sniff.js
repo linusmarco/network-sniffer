@@ -1,8 +1,10 @@
 const httpServer = require('http-server');
+const ip = require('ip');
 
-const addr = process.argv[2].split(':');
-const host = addr[0];
-const port = addr[1];
+const arg = process.argv[2];
+const addr = arg ? arg.split(':') : [];
+const host = addr[0] || ip.address();
+const port = addr[1] || 8080;
 
 var server = httpServer.createServer({
     logFn: logger
