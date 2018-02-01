@@ -17,7 +17,11 @@ if (!fs.existsSync('./logs')) {
 }
 
 let logFiles = ['./logs/current.log'];
-if (args.save) logFiles.unshift(`./logs/${now.toISOString()}.log`);
+if (args.save) {
+    const strDate = now.toISOString().replace(/:/g, '-');
+    console.log(strDate);
+    logFiles.unshift(`./logs/${strDate}.log`);
+}
 
 class Log {
     constructor(files, toConsole) {
