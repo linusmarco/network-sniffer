@@ -35,7 +35,15 @@ class Log {
     logReq(req, res) {
         const date = new Date();
         const url = req.url;
+        const urlBase = url.split('?')[0];
         const clientIP = req.connection.remoteAddress;
+
+        for (let i = 0; i < this.files.length; ++i) {
+            const isLogReq = this.files[i].substr(-urlBase.length) === urlBase;
+            const isMe = clientIP === host;
+            if (isLogReq && isMe) return;
+        }
+
         this.log(
             `[${date}] CLIENT: ${clientIP} | URL: http://${host}:${port}${url}`
         );
