@@ -22,7 +22,7 @@ if (args.save) logFiles.unshift(`./logs/${now.toISOString()}.log`);
 class Log {
     constructor(files, toConsole) {
         this.files = files;
-        this.toConsole = toConsole || true;
+        this.toConsole = toConsole === true;
         this.streams = this.files.map(f => {
             return fs.createWriteStream(f);
         });
@@ -59,7 +59,7 @@ class Log {
     }
 }
 
-let log = new Log(logFiles);
+let log = new Log(logFiles, !args.noprint);
 let server = httpServer.createServer({ logFn: log.logReq });
 
 server.listen(port, host, function() {
