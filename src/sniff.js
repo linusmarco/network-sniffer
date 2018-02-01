@@ -1,14 +1,23 @@
 const httpServer = require('http-server');
+const minimist = require('minimist');
 const ip = require('ip');
 const fs = require('fs');
 
-const arg = process.argv[2];
-const addr = arg ? arg.split(':') : [];
-const host = addr[0] || ip.address();
-const port = addr[1] || 8080;
+const args = minimist(process.argv, {
+    string: ['h', 'p'],
+    boolean: true
+});
+
+const host = args.h || ip.address();
+const port = args.p || 8080;
 const now = new Date();
 
-const logFiles = [`./logs/${now.toISOString()}.log`, './logs/current.log'];
+if (!fs.existsSync('./logs')) {
+    fs.mkdirSync('./logs');
+}
+
+let logFiles = ['./logs/current.log'];
+if (args.save) logFiles.unshift(`./logs/${now.toISOString()}.log`);
 
 class Log {
     constructor(files, toConsole) {

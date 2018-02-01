@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "http-server": "0.11.1",
-        "ip": "1.1.5"
+        "ip": "1.1.5",
+        "minimist": "1.2.0"
     }
 }
